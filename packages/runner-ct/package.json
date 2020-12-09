@@ -9,7 +9,8 @@
     "build-prod": "cross-env NODE_ENV=production yarn build",
     "clean-deps": "rm -rf node_modules",
     "postinstall": "echo '@packages/runner needs: yarn build'",
-    "watch": "webpack --watch --progress"
+    "watch": "webpack --watch --progress",
+    "test-unit": "mocha --config test/.mocharc.json test/**/*.spec.*"
   },
   "dependencies": {
     "cash-dom": "^8.1.0",

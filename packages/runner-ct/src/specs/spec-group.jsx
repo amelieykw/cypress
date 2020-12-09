@@ -1,6 +1,8 @@
+import { observer } from 'mobx-react'
 import cs from 'classnames'
 import React, { Component } from 'react'
 
+@observer
 class SpecGroup extends Component {
   constructor (props) {
     super(props)
@@ -10,6 +12,10 @@ class SpecGroup extends Component {
   render () {
     const { group, groupKey, parentPath = '', state } = this.props
     const { isOpen } = this.state
+
+    if (this.props.depth > 3) {
+      throw Error('This should not happen')
+    }
 
     return (<li key={groupKey} >
       <a onClick={() => this.setState({ isOpen: !isOpen })} >
@@ -27,11 +33,15 @@ class SpecGroup extends Component {
               path={newParentPath}
               state={state}
               spec={group[spec]}/>
-            : <SpecGroup key={spec}
+            : typeof group !== 'string'
+              ? <SpecGroup 
+              key={spec}
+              depth={(this.props.depth + 1) || 0}
               groupKey={spec}
               group={group[spec]}
               state={state}
               parentPath={newParentPath}/>
+              : <div>{' asdf ' + group}</div>
         })}
 
       </ul>

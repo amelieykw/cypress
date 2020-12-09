@@ -9,6 +9,7 @@ class SpecsList extends Component {
     const { state } = this.props
     const specGroups = specsStore.specs.length ? makeSpecHierarchy(specsStore.specs) : {}
 
+    console.log(specGroups)
     return (
       <div className="specs-list">
         <header>Select tests to run...</header>
@@ -16,6 +17,7 @@ class SpecsList extends Component {
 
           Object.keys(specGroups).map((groupKey) => {
             const group = specGroups[groupKey]
+            console.log(group)
 
             { // The `active` prop here is used only to
               // force repaint of the tree when selecting a spec
